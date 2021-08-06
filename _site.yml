@@ -1,0 +1,12 @@
+name: "desik23.github.io"
+title: "My Website"
+description: |
+  My Website
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Homepage"
+      href: index.html
+    - text: "About My Life"
+      href: about.html
+output: distill::distill_article
