@@ -1,0 +1,29 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this site",
+      "description": "Some additional details about the website",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n",
+      "last_modified": "2021-08-06T11:08:27-05:00"
+    },
+    {
+      "path": "CV.html",
+      "title": "CV",
+      "description": "Some additional details about the website",
+      "author": [],
+      "contents": "\r\nThis is my CV Page\r\nDesik Somasundaram\r\n\r\n\r\nggplot(data = diamonds, aes( x = carat, y = price)) +\r\n  geom_point(aes(color = price))\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2021-08-06T11:08:37-05:00"
+    },
+    {
+      "path": "index.html",
+      "title": "Desik Somasundaram",
+      "description": "Welcome to the website. I hope you enjoy it!\n",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n",
+      "last_modified": "2021-08-06T11:08:37-05:00"
+    }
+  ],
+  "collections": []
+}
