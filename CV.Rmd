@@ -1,8 +1,7 @@
 ---
 title: "CV"
-author: "Desik Somasundaram"
-date: "8/6/2021"
-output: html_document
+description: |
+  Some additional details about the website
 ---
 
 ```{r setup, include=FALSE}
