@@ -3,13 +3,11 @@ title: "Desik Somasundaram"
 image: "Desik.jpg"
 links:
   - label: LinkedIn
-    url: "https://linkedin.com/"
-  - label: Twitter
-    url: "https://twitter.com/"
+    url: "https://www.linkedin.com/in/desik-somasundaram-902a8a120"
   - label: GitHub
-    url: "https://github.com/"
+    url: "https://github.com/desik23"
   - label: Email
-    url: "mailto:email@email.com"
+    url: "mailto:desik23@gmail.com"
 output:
   postcards::jolla
 
