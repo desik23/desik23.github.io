@@ -15,4 +15,4 @@ site: distill::distill_website
 
 ---
  
-I am a student at UC Santa Barbara.
+I am a Master's in Environmental Data Science student at the UC Santa Barbara Bren School of Environmental Sciences and Management..

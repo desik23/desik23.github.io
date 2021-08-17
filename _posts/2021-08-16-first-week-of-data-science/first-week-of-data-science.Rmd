@@ -1,7 +1,7 @@
 ---
 title: "First Week of Data Science"
 description: |
-  A short description of the post.
+  Introduction to the Data Science Mindset and filter().
 author:
   - name: Unknown
 date: 08-16-2021
@@ -20,6 +20,8 @@ knitr::opts_chunk$set(echo = FALSE)
 In less than 2 weeks of class, I have had the opportunity to dive into data science world. It has been amazing to learn the power and versatility of R. I have learned that the data science mindset is a lot about getting to know your data before jumping into applying the tools you have. Programming is not an isolated activity but rather a community-based one with collaboration at the center of it all.
 When making decision in my coding, I am learning to consider reproducibility and readability so anyone can jump in and collaborate. There is an endless supply of tools and packages so finding the right requires knowing standard practice and efficiency needs.  
 
+
+### filter() function
 Gone are the days of endlessly filtering and creating Pivot Table after Pivot Table in Excel to get the data subset you need. I present to you filter of the dplyr package contained within the tidyverse. 
 
 Filter is an incredibly simple and powerful function that allows you to make new data subsets based on the conditions that you specify!
@@ -32,8 +34,5 @@ pop_countries_in_asia <- world_population %>%
 
 
 
-Distill is a publication format for scientific and technical writing, native to the web.
-
-Learn more about using Distill at <https://rstudio.github.io/distill>.
 
 
