@@ -3,7 +3,7 @@ title: "First Week of Data Science"
 description: |
   Introduction to the Data Science Mindset and filter().
 author:
-  - name: Unknown
+  - name: Desik Somasundaram
 date: 08-16-2021
 output:
   distill::distill_article:
