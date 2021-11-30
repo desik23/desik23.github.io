@@ -6,28 +6,28 @@
       "description": "My Experience",
       "author": [],
       "contents": "\nDesik Somasundaram\nDesik Somasundaram is a Master’s of Environmental Data Science student at the Bren School of Environmental Sciences and Management. He holds bachelor’s degrees in Environmental Engineering & Energy, and Environmental Policy from University of Delaware. After graduation, Desik worked as a Water Resources Modeler/Programmer in Malvern, PA for Environmental Resources Management (ERM). At ERM, Desik worked on projects ranging from oil spill and drill cuttings modelling to coastal imagery-based shoreline studies. His daily activities included coding, debugging, and use of a FORTRAN-based hydrodynamic modelling suite, Generalized Environmental Modeling System for Surfacewaters (GEMSS). He developed scripts in Python (including ESRI ArcPy), R and UNIX command line to clean and process data, and to make workflows more efficient. This experience opened his eyes to the power of programming. While working, Desik pursued his interests in sustainable development through the Micromaster’s Program in Data, Economics and Development Policy Program offered at MIT. This program elucidated to Desik that challenges associated with poverty, gender equality, education and the environment can be solved using data science. Eventually, Desik hopes to further harness the power of data science to develop initiatives to achieve the UN Sustainable Development Goals.\n\n\n\n",
-      "last_modified": "2021-11-30T14:21:29-08:00"
+      "last_modified": "2021-11-30T14:42:34-08:00"
     },
     {
       "path": "Blog.html",
       "title": "My Blog",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-11-30T14:21:30-08:00"
+      "last_modified": "2021-11-30T14:42:34-08:00"
     },
     {
       "path": "CV.html",
       "title": "CV",
       "author": [],
       "contents": "\n\n\n\n\n\n\n",
-      "last_modified": "2021-11-30T14:21:30-08:00"
+      "last_modified": "2021-11-30T14:42:35-08:00"
     },
     {
       "path": "index.html",
       "title": "Desik Somasundaram",
       "author": [],
       "contents": "\n\n          \n          \n          My Website\n          \n          \n          Homepage\n          About My Life\n          CV\n          Blog\n          \n          \n          \n          ☰\n          \n          \n      \n        \n          \n            Desik Somasundaram\n          \n          \n            \n              I am a Master’s in Environmental Data Science student at the UC Santa Barbara Bren School of Environmental Sciences and Management.\n            \n            \n              I am a Master’s in Environmental Data Science student at the UC Santa Barbara Bren School of Environmental Sciences and Management.\n            \n          \n\n          \n            \n              \n                  \n                    \n                      LinkedIn\n                    \n                  \n                \n                                \n                  \n                    \n                      GitHub\n                    \n                  \n                \n                                \n                  \n                    \n                      Email\n                    \n                  \n                \n                              \n          \n\n          \n            \n              \n                                \n                  \n                    LinkedIn\n                  \n                \n                                \n                  \n                    GitHub\n                  \n                \n                                \n                  \n                    Email\n                  \n                \n                              \n            \n          \n        \n      \n    \n\n    \n    \n    ",
-      "last_modified": "2021-11-30T14:21:31-08:00"
+      "last_modified": "2021-11-30T14:42:35-08:00"
     }
   ],
   "collections": ["posts/posts.json"]

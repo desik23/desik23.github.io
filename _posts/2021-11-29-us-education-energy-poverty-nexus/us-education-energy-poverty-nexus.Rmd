@@ -7,10 +7,6 @@ author:
     url: {}
 date: 2021-11-29
 output:
-  pdf_document:
-    toc: true
-    fig_width: 6 
-    fig_height: 4
   distill::distill_article:
     toc: true
     self_contained: false
@@ -43,20 +39,23 @@ The goal of this project is to encourage more research through the education-ene
 ## Datasets Used
 The analysis was conducted on the county level in the US due to the increased sampling power and available data resolution for parameters in question.
 
-**Educational Attainment data** available on the county-level from the USDA Economic Research Service, the most recent data is available for 2015 to 2019
+**Educational Attainment data** available on the county-level from the USDA Economic Research Service, the most recent data is available for 2015 to 2019. An example of statewide data is shown for the entire US in Figure 1.
 (Link: https://data.ers.usda.gov/reports.aspx?ID=17829)
-<center>
-![Educational Attainment in US](/Users/gnanadesikansomasundaram/Desktop/MEDSProgram/desik23.github.io/img/educ-attainment.png)
+
+```{r educ-attainment, echo=FALSE, fig.align = 'center', out.width = "60%", fig.cap = "Educational Attainment in US", results = 'markup'}
+knitr::include_graphics(here::here("img", "educ-attainment.png"))
+```
 
 **Comprehensive County Indicators data** from County Health Rankings which compiles data from several data sources. The final analysis used the ***math and reading score indicators*** from this dataset that are modelled by Stanford Education Data Archive program based on EDFacts and state sources to achieve comparability across the country. Although the dataset is labelled as 2021 data, the testing score is actually based on 2018. The math and reading scores are presented as average grade level performance for 3rd graders.  The scores generally range from 1 to 4. The expected value is 3 indicating that 3rd graders are performing at a 3rd grade level. A score of 3.5 would they are perform 0.5 a grade level higher than expected. 
 (Link: https://www.countyhealthrankings.org/explore-health-rankings/rankings-data-documentation) 
 
 
-**Low-Income Energy Affordability data** available on county-level from the Department of Energy based on modelling done using the 2016 5-year American Community Survey (ACS5)
+**Low-Income Energy Affordability data** available on county-level from the Department of Energy based on modelling done using the 2016 5-year American Community Survey (ACS5). An example of California data is show in Figure 2.
 (Link: https://www.energy.gov/eere/slsc/low-income-energy-affordability-data-lead-tool)
 
-<center>
-![California LEAD tool by county](/Users/gnanadesikansomasundaram/Desktop/MEDSProgram/desik23.github.io/img/CA-lead-tool-map.png){ height=30%}
+```{r ca-lead-tool, echo=FALSE, fig.align = 'center', out.width = "60%", fig.cap = "California LEAD tool by county"}
+knitr::include_graphics(here::here("img", "CA-lead-tool-map.png"))
+```
 
 **Limitations of the the datasets used**: 
 
