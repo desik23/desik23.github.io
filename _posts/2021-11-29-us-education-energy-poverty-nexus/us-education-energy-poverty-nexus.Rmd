@@ -7,16 +7,16 @@ author:
     url: {}
 date: 2021-11-29
 output:
-  html_document:
-    toc: yes
-    df_print: paged
+  distill::distill_article:
+    toc: true
+    self_contained: false
   pdf_document:
     toc: true
     includes:  
       in_header: my_header.tex
-  distill::distill_article:
-    toc: true
-    self_contained: false
+  html_document:
+    toc: yes
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
