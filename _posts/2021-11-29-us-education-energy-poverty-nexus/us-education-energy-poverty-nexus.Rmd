@@ -1,6 +1,6 @@
 ---
 title: "U.S. Education-Energy Poverty Nexus"
-description: |
+description: | 
   An exploratory analysis of the relationship between education and energy burden in the U.S.
 author:
   - name: Desik Somasundaram
@@ -10,9 +10,13 @@ output:
   distill::distill_article:
     toc: true
     self_contained: false
-    fig_width: 6 
-    fig_height: 4
-    
+  pdf_document:
+    toc: true
+    includes:  
+      in_header: my_header.tex
+  html_document:
+    toc: yes
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -29,7 +33,7 @@ library(distill)
 ## Introduction
 
 **Premise:** Energy poverty is one of the significant challenges for developing countries of the world with more than a billion people around the world lacking access to simple technologies such as lamps and appliances. The idea that the lack of access to lighting at night or heating/cooling during thermal comfort could impact children and their ability to perform well in school seems apparent. Several studies have concluded households with a low level of educational attainment have more limited access to electricity and other forms of clean energy (Apergis, Polemis, and Soursou 2021). 
-It's evident that there's potential for a vicious cycle where energy poverty is hindering education which in turn decreasing their ability to escape it; ultimate depriving people of a higher quality life. 
+It's evident that there's potential for a vicious cycle where energy poverty is hindering education which in turn is decreasing their ability to escape it; ultimately depriving people of a higher quality life. 
 
 **Question:** Do these relationships between energy poverty and education hold true in the United States (the developed country context, based on GDP)? 
 
@@ -50,7 +54,7 @@ knitr::include_graphics(here::here("img", "educ-attainment.png"))
 (Link: https://www.countyhealthrankings.org/explore-health-rankings/rankings-data-documentation) 
 
 
-**Low-Income Energy Affordability data** available on county-level from the Department of Energy based on modelling done using the 2016 5-year American Community Survey (ACS5). An example of California data is show in Figure 2.
+**Low-Income Energy Affordability data** available on county-level from the Department of Energy based on modelling done using the 2016 5-year American Community Survey (ACS5). An example of California data is shown in Figure 2. This analysis will focus on **energy burden** which represents the % income a household must spend on energy to meet their needs. 
 (Link: https://www.energy.gov/eere/slsc/low-income-energy-affordability-data-lead-tool)
 
 ```{r ca-lead-tool, echo=FALSE, fig.align = 'center', out.width = "60%", fig.cap = "California LEAD tool by county"}
@@ -91,13 +95,15 @@ LEAD_df <- LEAD_df %>%
            mutate(`FIPS Code` = (gsub("'", "",(LEAD_df$`Geography ID`)))) %>% 
            subset(select= -c(`Geography ID`))
 
-# Clean county health data to include state, county, test scores and rural pop
+# Clean county health data to include state, county, test scores and median
 county_health <- county_health %>% 
                  select( contains("code")| contains("state") | 
                          contains("county")|contains("v159")
-                         |contains("v160")) %>% 
+                         |contains("v160") |contains("v063")) %>% 
                  rename(readingscores = v159_rawvalue) %>% 
-                 rename(mathscores = v160_rawvalue)
+                 rename(mathscores = v160_rawvalue) %>% 
+                 rename(medianincome = v063_rawvalue) %>% 
+                 mutate(medianincome_k = (medianincome/1000))
 
 ```
 
@@ -119,28 +125,28 @@ all_param <- energy_edu %>%
 
 
 
-## Analysis Plan: Two Stages
+## Analysis Plan: Three Stages
 ### Part 1
-First will be exploring whether there is a correlation between educational attainment and energy burden. 
+First we will be exploring whether there is a correlation between educational attainment and energy burden. 
 
 **How does educational attainment affect energy burden?**
 
-The Apergis, Polemis, and Soursou 2021 paper concluded that across several energy poverty and education studies in developing countries that "households with a low level of educational attainment, have restricted access to clean energy forms, such as electricity".
+The Apergis, Polemis, and Soursou 2021 paper concluded that across several studies on energy poverty and education in developing countries that "households with a low level of educational attainment, have restricted access to clean energy forms, such as electricity".
 In the developed country context, we will test if a similar relationship exists between educational attainment and energy burden. The assumption is that **energy burden** is a representative measure of access instead of the binary "access/no access" scenario in developing countries.  
 
 $$\text{energy burden}_i = \beta_0 + \beta_1 \text{educational attainment}_i + \epsilon_i$$
-**Energy burden will be represent by the average energy burden (% Income)** from the LEAD Energy Affordability data
+**Energy burden will be represented by the average % Income needed to meet household energy needs** from the LEAD Energy Affordability data
 **Educational attainment will be represented by the % of adults with a HS diploma or less** from USDA Economic Research Service data
 
 
 
 ### Part 2
-Next we will be exploring whether there is a correlation between energy burden and educational outcomes(measured by standardized math and reading scores).
+Next we will be exploring whether there is a correlation between energy burden and educational outcomes (measured by standardized math and reading scores).
 The idea is that examining a short-term education measure such as standardized test scores will reflect the effects of energy burden as surveyed and modeled in recent data. 
 
 **Does energy burden affect a student's ability to do well in school?**
 
-The assumption is that 3rd grader **english and math standardized test scores** are a representative measure of doing well in school. 
+The assumption is that 3rd grade **english and math standardized test scores** are a representative measure of doing well in school. 
 
 With the energy affordability data mainly reflecting household building energy needs, it is expected that heating and cooling dominates energy spending. US Energy Information Administration estimates that more that half of household energy spending is spent on heating and cooling. The lack of thermal comfort has shown to increase the amount of mistakes by even adults. The Institute of Education Sciences has compiled literature on the optimal learning temperature based on thermal comfort (https://ies.ed.gov/ncee/edlabs/regions/west/Ask/Details/64). 
 
@@ -149,10 +155,19 @@ The rationale is that although most families in America have access to electrici
 $$\text{standardized test scores-READING}_i = \beta_0 + \beta_1 \text{energy burden}_i + \epsilon_i$$
 $$\text{standardized test scores-MATH}_i = \beta_0 + \beta_1 \text{energy burden}_i + \epsilon_i$$
 **Standardized test scores will be represented by the math and reading scores presented as average grade level performance for 3rd graders** from Stanford Education Data Archive data accessed through County Health Rankings
-**Energy burden will be represent by the average energy burden (% Income)** from the LEAD Energy Affordability data
+**Energy burden will be represented by the average % Income needed to meet household energy needs** from the LEAD Energy Affordability data
+
+### Part 3
+**Model robustness check:**
+One of the main critiques of the models in this analysis could be that there is potential omitted variable bias. The most significant one that comes to mind is income. Is energy poverty really distinguishable and significant from poverty alone?
+We will test this using income as an independent variable for the regressions above. 
+$$\text{energy burden}_i = \beta_0 + \beta_1 \text{educational attainment}_i + \beta_2 \text{income}_i + \epsilon_i$$
+$$\text{standardized test scores-READING}_i = \beta_0 + \beta_1 \text{energy burden}_i + \beta_2 \text{income}_i + \epsilon_i$$
+$$\text{standardized test scores-MATH}_i = \beta_0 + \beta_1 \text{energy burden}_i + \beta_2 \text{income}_i + \epsilon_i$$
+
 
 ## Results
-
+**NOTE: Kable formating has rounded very small p-values in scientific notation to 0**
 
 ```{r, echo=FALSE}
 lm(avg_energy_burden_percent_income ~  pct_hs_or_less, data=all_param) %>%
@@ -164,7 +179,7 @@ lm(avg_energy_burden_percent_income ~  pct_hs_or_less, data=all_param) %>%
 
 **Answer: Since $p-value is < 0.001$ we reject the null that educational attainment(% with HS diploma or less) has an effect of 0 on Average Energy Burden(% Income).** We can say there is a **statistically significant correlation (at the 0.1% significance level).**
 
-The $\beta_1$ indicates that there is **0.062 increase in average energy burden as % Income for every percent point increase in % with HS diploma or less** in a given a county. 
+The $\beta_1$ indicates that there is a **0.062 increase in average energy burden as % Income for every percent point increase in % with HS diploma or less** in a given a county. 
 
 Although the estimated coefficient is positive, it is truly reflecting a negative correlation between educational attainment and energy burden. Since the educational attainment variable used is % with a high school diploma or less, an increase in this variable indicates less education attained. Therefore, with less education attained, there is an increase in energy burden. 
 
@@ -186,14 +201,49 @@ lm(mathscores ~ avg_energy_burden_percent_income , data=all_param) %>%
 
 **Answer: Since $p-value is < 0.001$ we reject the null that there is that Average Energy Burden(% Income) has an effect of 0 on standardized test scores.** We can say there is a **statistically significant correlation (at the 0.1% significance level).**
 
-The $\beta_1$ indicates that there is **0.06 decrease in average grade level in reading and math scores for every percent point increase in average energy burden as % Income** in a given a county. 
+The $\beta_1$ indicates that there is a **0.06 decrease in average grade level in reading and math scores for every percent point increase in average energy burden as % Income** in a given a county. 
+
+
+```{r, echo=FALSE}
+lm(avg_energy_burden_percent_income ~  pct_hs_or_less + medianincome_k, data=all_param) %>%
+  summary() %>% 
+  xtable() %>% 
+  kable(caption = "**Does educational attainment affect energy burden even when considering income alone?**", digits = 3) %>% 
+  kable_styling()
+```
+
+**When adding income to the regression as an independent variable, we can see that there is still a statistically significant correlation between educational attainment and energy burden at the 0.1% significance level. However, the effect size is noticeably smaller.**
+
+The $\beta_1$ indicates that there is a **0.018 increase in average energy burden as % Income for every percent point increase in % with HS diploma or less** in a given a county. 
+
+```{r, echo=FALSE}
+lm(readingscores ~ avg_energy_burden_percent_income + medianincome_k + avg_energy_burden_percent_income*medianincome_k , data=all_param) %>%
+  summary()%>% 
+  xtable() %>% 
+  kable(caption = "**Does energy burden affect reading scores (among 3rd graders)when considering income?**", digits = 3) %>% 
+  kable_styling()
+```
+
+```{r, echo=FALSE}
+lm(mathscores ~ avg_energy_burden_percent_income + medianincome_k + avg_energy_burden_percent_income*medianincome_k, data=all_param) %>%
+  summary() %>% 
+  xtable() %>% 
+  kable(caption = "**Does energy burden affect math scores (among 3rd graders) when considering income?**", digits = 3) %>% 
+  kable_styling()
+```
+
+$\beta_1$ indicates **math and reading scores fall by 0.1 grade level for each percent increase in energy burden when income is $0**.
+
+$\beta_2$ indicates the coefficient on median income alone when energy burden is 0% is **not statistically significant different** from 0.  
+
+$\beta_3$ indicates the impact of average energy burden on math and reading scores is 0.003 grade level higher for each $1000 increase in median income. This coefficient is telling us how the relationship between standardized test score and energy varies with median income and that at higher median incomes the negative effect energy burden slowly getting dissipated. 
 
 ## Conclusions and Next steps
-The two-step analysis indicated that lower levels educational attainment correlate with higher levels of energy burden and higher levels of energy burden correlate with lower standardized test scores. This indicates there may be a cycle of energy poverty that is difficult to break through because of it's close linkage with education. To confirm this connection, further research is needed to scrutinize the existing models. With the lows R^2 values, the current models are far from being predictive. Further evidence is needed to determine whether energy burdens are affecting school performance through thermal comforts or some other means. 
+The first two steps of the analysis indicated that lower levels educational attainment correlate with higher levels of energy burden and higher levels of energy burden correlate with lower standardized test scores. The addition of income as independent variable and interaction showed that the initial results still generally hold true but as a smaller effect size. This indicates there may be a cycle of energy poverty that is difficult to break through because of it's close linkage with education. To confirm this connection, further research is needed to scrutinize the existing models. With the low R^2 values, the current models are far from being predictive. Further evidence is needed to determine whether energy burdens are affecting school performance through thermal comforts or some other means. 
 
 Starting points could be: 
 
-1. Are there any potential omitted variable biases? 
+1. Are there any other potential omitted variable biases? 
 
 2. Is energy poverty able to be detached from the effects of poverty and income levels as a whole? 
 
